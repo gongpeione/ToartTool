@@ -1,0 +1,150 @@
+html {
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    font-weight: 300;
+    
+}
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    overflow: hidden;
+}
+body * {
+    font-family: inherit;
+    font-weight: 300;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+}
+#title-bar {
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #409eff;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    box-sizing: border-box;
+    color: #fff;
+}
+#title-bar h1 {
+    flex: 1;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 300;
+    -ms-overflow-style: scrollbar;
+    -webkit-app-region: drag;
+}
+#title-bar .el-dialog__headerbtn {
+    position: static;
+    align-self: center;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+}
+#title-bar i {
+    color: #fff;
+}
+#title-bar .on-setting i {
+    color: #145896;
+}
+
+.body {
+    flex: 1;
+    padding: 15px;
+    margin-top: 40px;
+    height: calc(100vh - 40px);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+#filepath {
+    display: none;
+}
+.filpath-area {
+    
+}
+.filpath-area .el-button {
+    margin-left: 5px;
+}
+[class$=area] {
+    display: flex;
+    margin-bottom: 10px;
+}
+.db-area .el-date-editor {
+    flex: 1;
+    margin-right: 5px;
+}
+.el-picker-panel {
+    transform-origin: center !important;
+    position: fixed !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) scale(.7) !important;
+}
+
+.setting-area {
+    flex-wrap: wrap;
+}
+.setting-area .el-input {
+    margin-bottom: 5px;
+    /* width: 50%;
+    padding: 2px; */
+    box-sizing: border-box;
+}
+
+.setting-area h3 {
+    width: 100%;
+    font-weight: 500;
+    margin: 0;
+    font-size: 12px;
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    color: #999;
+}
+.setting-area + .el-button {
+    margin: 0 auto;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: block;
+}
+.setting-area h3:not(:first-of-type) {
+    margin-top: 10px;
+}
+
+.log-area {
+    width: 100%;
+    border: none;
+    height: 230px;
+    outline: none;
+    background-color: #1e1e1e;
+    color: #eee;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    box-sizing: border-box;
+    overflow-x: auto;
+    margin: 0;
+}
+.log-area ol {
+    margin: 0;
+    width: 100%;
+    padding: 5px 40px;
+}
+
+input[type=file] {
+    display: none;
+}
+
+.el-message {
+    top: 50px;
+}

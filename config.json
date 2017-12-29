@@ -1,0 +1,12 @@
+{
+    "db": {
+        "host": "localhost",
+        "user": "root",
+        "pass": "",
+        "name": "wordpress"
+    },
+    "env": {
+        "php": "/usr/local/Cellar/php56/5.6.32_8/bin/php",
+        "phpFile": "/Users/gongpei/tmp/a.php"
+    }
+}

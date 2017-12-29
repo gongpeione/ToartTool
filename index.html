@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>美术素材库操作工具</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <meta name="theme-color" content="#363d4c">
+
+    <link rel="stylesheet" href="./style/normalize.css">
+    <link rel="stylesheet" href="./style/element.css">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+    <div id="app">
+        <input type="file" webkitdirectory id="filePath" ref="filePath" @change="onPathChange"/>
+        <input type="file" id="phpPath" ref="phpPath" @change="onPhpChange"/>
+        <input type="file" id="phpFilePath" ref="phpFilePath" @change="onPhpFileChange" accept=".php"/>
+        <div id="title-bar">
+            <h1>
+                <i class="el-icon el-icon-picture"></i> 
+                美术素材库操作工具 
+                {{ uploading ? '上传中' : ''}}
+            </h1>
+            <button 
+                type="button" 
+                aria-label="Setting" 
+                class="el-dialog__headerbtn" 
+                :class="{'on-setting': currentWin === 'setting'}"
+                @click="setting"
+            >
+                <i class="el-dialog__close el-icon el-icon-setting"></i>
+            </button>
+            <button type="button" aria-label="Close" class="el-dialog__headerbtn" @click="close">
+                <i class="el-dialog__close el-icon el-icon-close"></i>
+            </button>
+        </div>
+        <div class="body" v-if="currentWin === 'main'">
+            <!-- {{db}}{{env}} -->
+            <div class="filpath-area">
+                <el-input placeholder="请选择文件夹路径" v-model="filePath" disabled></el-input>
+                <el-button @click="choiceFolder" type="primary">选择文件夹</el-button>
+                <el-button @click="upload" icon="el-icon-upload" type="primary" :disabled="!filePath || uploading">上传</el-button>
+            </div>
+            <div class="db-area">
+                <el-date-picker
+                    v-model="uploadDate"
+                    type="date"
+                    placeholder="上传日期"
+                    disabled
+                >
+                </el-date-picker>
+                <el-date-picker
+                    v-model="modifiyDate"
+                    type="date"
+                    placeholder="请选择要修改到的日期"
+                    :editable="false"
+                    :disabled="!uploaded"
+                >
+                </el-date-picker>
+                <el-button @click="modifyDate" icon="el-icon-date" type="primary" :disabled="!modifiyDate">修改</el-button>
+            </div>
+            <div class="log-area">
+                <ol>
+                    <li v-for="line in log">{{line}}</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="body" v-if="currentWin === 'setting'">
+            <div class="setting-area">
+                <h3>数据库</h3>
+                <el-input placeholder="Host" v-model="db.host" size="mini">
+                    <template slot="prepend">主机</template>
+                </el-input>
+                <el-input placeholder="User" v-model="db.user" size="mini">
+                    <template slot="prepend">用户</template>
+                </el-input>
+                <el-input placeholder="Password" v-model="db.pass" size="mini">
+                    <template slot="prepend">密码</template>
+                </el-input>
+                <el-input placeholder="Name" v-model="db.name" size="mini">
+                    <template slot="prepend">库名</template>
+                </el-input>
+                
+                <h3>环境</h3>
+                <el-input placeholder="PHP" v-model="env.php" size="mini" disabled>
+                    <template slot="prepend">PHP 路径</template>
+                    <template slot="append">
+                        <el-button type="primary" @click="changePhp">浏览</el-button>
+                    </template>
+                </el-input>
+                <el-input placeholder="PHP 文件" v-model="env.phpFile" size="mini" disabled>
+                    <template slot="prepend">PHP 文件</template>
+                    <template slot="append">
+                        <el-button type="primary" @click="changePhpFile">浏览</el-button>
+                    </template>
+                </el-input>
+                
+            </div>
+            <el-button type="success" size="mini" @click="saveSetting">保存</el-button>
+        </div>
+    </div>
+
+    <script src="./script/vue.js"></script>
+    <script src="./script/element.js"></script>
+    <script>
+        const mysql = require('mysql');
+        const moment = require('moment');
+        require('./renderer.js');
+    </script>
+        
+</body>
+</html>
